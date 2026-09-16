@@ -1,0 +1,12 @@
+{
+  "name": "FindsYou",
+  "short_name": "FindsYou",
+  "description": "Stop looking. It finds you work.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e0b10",
+  "theme_color": "#0e0b10",
+  "icons": [
+    { "src": "/assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

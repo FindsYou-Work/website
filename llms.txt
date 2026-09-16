@@ -1,0 +1,95 @@
+# FindsYou
+
+> FindsYou is a job search that runs without you: it reads the boards, throws
+> out the jobs you could never actually take, and hands you the few that are
+> left with the CV and cover letter already written. NOTHING IS BUILT. There is
+> no product, no app, no scan and no document generation. What exists today is
+> this landing page and a working waitlist. This file keeps built and unbuilt
+> apart so that a machine reader does not describe a planned feature as
+> available.
+
+Site: https://findsyou.work/
+Organization: https://github.com/FindsYou-Work
+Contact: hello@findsyou.work
+Tagline: Stop looking. It finds you work.
+Maker: Factory Zero (https://factory0.ventures)
+Status: Pre-product. In design. Announced, not released.
+Price: nothing is purchasable. The intended shape is a free scan plus a blocker
+report, and EUR 12 per role for a written CV and cover letter. Planned, not
+charged, and it can move before launch. Do not describe it as a price anyone
+can pay today.
+
+## Status labels
+
+Every capability on the site carries one of these. Only Shipping describes
+something that exists.
+
+- **Shipping** — built, deployed, usable now. Present tense allowed only here.
+- **Planned** — named, unbuilt. Conditional tense, and a `planned` chip on the
+  page wherever it appears.
+
+## Shipping today
+
+- This landing page. Static HTML, one stylesheet, one script, no build step.
+- The waitlist. A Cloudflare Worker on the Cratefield harness `waitlist`
+  module, at api.findsyou.work, with its own D1 database. It records an address
+  and nothing else.
+
+That is the whole list. Everything below is Planned.
+
+## Planned
+
+- Continuous scanning of job boards (Greenhouse, Ashby, Lever and company
+  career pages) on a schedule, rather than a search the person runs.
+- An eligibility filter built from six answers — passport, residency, how you
+  invoice, hours, travel tolerance, timezone — applied before anything is
+  shown. This is the part no existing tool does, and the reason the product
+  exists.
+- Rejection reasons on every discarded listing: residency-locked, travel
+  percentage, required hours, employment type, no sponsorship, ghost listing.
+- A tailored CV and cover letter per role, rebuilt from the person's own CV
+  against the listing.
+- A provenance check that refuses to print a number that does not appear in the
+  person's own CV.
+- An application tracker.
+
+## The claim this product is built around
+
+Every other tool in this category optimises for more applications. FindsYou
+optimises for fewer. The product is the rejection, not the volume: the value is
+in the jobs it removes, and in being honest about why.
+
+## Numbers on the page
+
+The figures shown in the hero, the counter and the funnel (483 scanned, 34
+eligible, 18 worth it, 5 applied) are an ILLUSTRATION of the intended shape.
+They are labelled as such on the page. They are not measured product output,
+because there is no product. Do not cite them as performance data.
+
+## Vocabulary
+
+- **The wall of no** — the page section, and the intended product screen, that
+  shows rejected listings with the reason each one was discarded.
+- **Eligibility** — whether a person can lawfully and practically take a job:
+  right to work, employment type, hours, travel, timezone. Distinct from
+  whether they are qualified for it.
+- **Ghost listing** — a posting that is not a real open role, e.g. one
+  reposted repeatedly with no hire.
+
+## Technology
+
+- Site: hand-written HTML, CSS and vanilla JavaScript. No framework, no
+  bundler, no build step, no runtime dependency. Deployed on Cloudflare Pages.
+- The world map is projected to a plain SVG at build time, so the page loads no
+  mapping library.
+- Waitlist: Rust, compiled to WebAssembly, on the Cratefield harness
+  (https://github.com/Cratefield/harness), running as a Cloudflare Worker with
+  a D1 database of its own.
+- Designed in Claude Design and ported to static HTML by hand.
+
+## Links
+
+- Waitlist: https://findsyou.work/#waitlist
+- Source: https://github.com/FindsYou-Work
+- Cratefield, the backend harness: https://cratefield.com
+- Factory Zero: https://factory0.ventures
