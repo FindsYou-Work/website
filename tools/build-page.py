@@ -178,7 +178,7 @@ page = f'''<!DOCTYPE html>
       <circle class="mark__fall mark__fall--b" cx="17" cy="10" r="1.7"/>
       <circle class="mark__catch" cx="13" cy="16" r="2.6"/>
     </svg>
-    <span class="mark__word"><b>finds</b><span>you</span></span>
+    <span class="mark__word"><b>finds</b><span>you</span><i>.work</i></span>
   </a>
   <div class="nav__links">
     <a href="#wall">the wall</a>
@@ -365,7 +365,7 @@ page = f'''<!DOCTYPE html>
 <footer class="foot">
   <div class="foot__grid">
     <div>
-      <p class="foot__mark">findsyou</p>
+      <p class="foot__mark">finds<span>you</span><i>.work</i></p>
       <p style="line-height:1.6;max-width:30ch">Fewer jobs. The ones you can actually take, with the documents already written.</p>
     </div>
     <div class="foot__col">
@@ -387,7 +387,7 @@ page = f'''<!DOCTYPE html>
       <a href="/sitemap.xml">sitemap.xml</a>
       <a href="/.well-known/security.txt">security.txt</a>
     </div>
-    <p class="foot__base">findsyou &middot; findsyou.work &middot; a <a href="https://factory0.ventures">Factory Zero</a> venture &middot; &copy; 2026</p>
+    <p class="foot__base">findsyou.work &middot; a <a href="https://factory0.ventures">Factory Zero</a> venture &middot; &copy; 2026</p>
   </div>
 </footer>
 

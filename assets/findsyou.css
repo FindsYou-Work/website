@@ -381,6 +381,11 @@ findsyou-map { display: block; min-height: 220px; }
 .mark__word { font-family: var(--mono); font-size: 14px; letter-spacing: -.01em; color: var(--ink); }
 .mark__word b { font-weight: 500; }
 .mark__word span { color: var(--dim); }
+/* The TLD completes the sentence — "finds you work" — so it is never dropped
+   from the wordmark and it carries the accent that the caught listing does. */
+.mark__word i { font-style: normal; color: var(--accent); }
+.foot__mark i { font-style: normal; color: var(--accent); }
+.foot__mark span { color: var(--dim); }
 
 @media (prefers-reduced-motion: reduce) {
   .mark__catch { animation: none; transform: none; opacity: 1; }
