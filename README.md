@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="assets/readme-banner.png" alt="FindsYou. Stop looking. It finds you work." width="100%">
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/PRODUCT-NOT%20BUILT-C9503F?style=flat-square&labelColor=0E0B10" alt="Product: not built">
   <img src="https://img.shields.io/badge/PAGES-1-ECE6EA?style=flat-square&labelColor=0E0B10" alt="Pages: 1">
   <img src="https://img.shields.io/badge/STACK-VANILLA%20JS-ECE6EA?style=flat-square&labelColor=0E0B10" alt="Stack: vanilla JS">
@@ -70,7 +74,9 @@ Plus `404.html`, `llms.txt`, `sitemap.xml`, `robots.txt`, `site.webmanifest` and
 │   ├── findsyou.css        the whole design system, tokens at the top
 │   ├── findsyou.js         reveal, the three scroll scenes, the waitlist
 │   ├── world.svg           GENERATED — projected at build time, inlined into the page
-│   └── favicon.svg         the mark: things fall, one is caught
+│   ├── favicon.svg         the mark: things fall, one is caught
+│   ├── org-avatar.png      GitHub org avatar, uploaded by hand
+│   └── readme-banner.png   the banner above — GitHub only, not served
 ├── llms.txt                the structured summary for machine readers
 ├── robots.txt              AI crawlers welcomed by name
 ├── _headers  _redirects    Cloudflare Pages

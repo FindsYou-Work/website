@@ -30,6 +30,10 @@ find dist -name '.DS_Store' -delete
 # by the browser, so it does not need to ship.
 rm -f dist/assets/world.svg
 
+# GitHub-only artwork: the README banner and the org avatar are not part of the
+# site, and there is no reason to serve 150KB of them.
+rm -f dist/assets/readme-banner.png dist/assets/org-avatar.png
+
 # Cache busting. Asset filenames are not content-hashed in the repo, so a deploy
 # alone cannot invalidate a cached CSS/JS file. Stamp each reference with a short
 # content hash here; _headers can then cache /assets/*.css and *.js immutably
