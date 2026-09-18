@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Emits index.html. The wall and the rain are repetitive, so they are generated
-here and the OUTPUT IS COMMITTED — the site itself has no build step. Re-run
+here and the OUTPUT IS COMMITTED: the site itself has no build step. Re-run
 this only when the copy or the card decks change:  python3 tools/build-page.py
 """
 import html, pathlib, random
@@ -16,7 +16,7 @@ COS = ['Northwind','Lumen Labs','Halcyon','Brightwater','Meridian','Kestrel','Or
 LOCS = ['Remote · EU','Remote · US','Remote · Worldwide','Hybrid · Berlin','Remote · UK',
         'Remote · Americas','Remote · Lisbon','Remote · APAC']
 REASONS = ['Residency-locked to Germany','50–60% travel','Requires US hours','Full-time only',
-           'Ghost job — reposted 4×','No sponsorship']
+           'Ghost job: reposted 4×','No sponsorship']
 N_CARDS = 48
 KEEP = {7, 16, 25, 34, 43}
 
@@ -65,7 +65,7 @@ QS = [('Passport', 'Which one you hold.'),
       ('Hours', 'The hours you will actually work.'),
       ('Travel', 'How much, how often.'),
       ('Timezone', 'Where your day starts.')]
-STEPS = [('Tell it about you — once.', 'Six questions and your CV.'),
+STEPS = [('Tell it about you, once.', 'Six questions and your CV.'),
          ('It watches.', 'Every board, every day, while you get on with your life.'),
          ('You get a shortlist.', 'With the CV and cover letter already written.')]
 FUNNEL = [(483, 'scanned', '100%', '#2c272e', '#b9b1b8'),
@@ -98,7 +98,7 @@ page = f'''<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FindsYou · Stop looking. It finds you work.</title>
-<meta name="description" content="FindsYou is a job search that runs without you. It reads every board, throws out the jobs you could never actually take — wrong residency, wrong hours, ghost listings — and hands you the few that are left, with the CV and cover letter already written. In design; not yet built.">
+<meta name="description" content="FindsYou is a job search that runs without you. It reads every board, throws out the jobs you could never actually take (wrong residency, wrong hours, ghost listings) and hands you the few that are left, with the CV and cover letter already written. In design; not yet built.">
 <link rel="canonical" href="https://findsyou.work/">
 <meta name="theme-color" content="#0e0b10">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -166,7 +166,7 @@ page = f'''<!DOCTYPE html>
 <body>
 
 <p class="banner">
-  Not released — the scan, the filter and the profile exist as code, and none of it is running yet.
+  Not released: the scan, the filter and the profile exist as code, and none of it is running yet.
   The waitlist is real and is the only thing here that works.
   <a href="#waitlist">Join it</a>, and you will hear once, when there is something to use.
 </p>
@@ -211,7 +211,7 @@ page = f'''<!DOCTYPE html>
       <p class="eyebrow">01 / the number</p>
       <p class="number__n" data-count-from="483" data-count-to="18">483</p>
       <p class="number__cap">Jobs scanned in a week. <b>Jobs worth your time.</b></p>
-      <p class="eyebrow" style="margin-top:28px;opacity:.6">an illustration &mdash; these are not yet real numbers</p>
+      <p class="eyebrow" style="margin-top:28px;opacity:.6">an illustration: these are not yet real numbers</p>
     </div>
   </section>
 
@@ -340,13 +340,13 @@ page = f'''<!DOCTYPE html>
     <p class="eyebrow" style="margin-bottom:26px">08 / price</p>
     <p class="price__n">Free</p>
     <p class="lede">To scan every board and see your blockers. The report on why each job would have said no is yours to keep.</p>
-    <p style="color:var(--dim);font-size:16px;max-width:520px;margin:18px auto 0">Pay only when you want the documents written. <span style="color:var(--ink)">&euro;12 per role</span>, CV and cover letter together. <span class="chip chip--planned" style="display:inline-block;margin-left:6px">planned &mdash; nothing is chargeable yet</span></p>
+    <p style="color:var(--dim);font-size:16px;max-width:520px;margin:18px auto 0">Pay only when you want the documents written. <span style="color:var(--ink)">&euro;12 per role</span>, CV and cover letter together. <span class="chip chip--planned" style="display:inline-block;margin-left:6px">planned: nothing is chargeable yet</span></p>
   </section>
 
   <!-- ------------------------------------------------------- 09 waitlist -->
   <section class="band wrap wait" id="waitlist">
     <h2 class="display" style="font-size:clamp(34px,6vw,84px);max-width:18ch;margin-bottom:28px">You are not bad at applying. You are applying to the wrong jobs.</h2>
-    <p class="lede" style="max-width:52ch">Nothing is released yet. Leave your address and you will hear once &mdash; when there is something to use.</p>
+    <p class="lede" style="max-width:52ch">Nothing is released yet. Leave your address and you will hear once, when there is something to use.</p>
 
     <form class="wait__form" id="waitlist-form" data-contact="hello@findsyou.work" data-double-opt-in="false" hidden>
       <div class="field">

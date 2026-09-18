@@ -1,4 +1,4 @@
-/* findsyou.work — reveal, the three scroll scenes, and the waitlist.
+/* findsyou.work: reveal, the three scroll scenes, and the waitlist.
    Progressive enhancement throughout: nothing is hidden until this file runs,
    so a blocked or failing script can never leave the page unreadable. The
    whole site is a legible document with JS off. */
@@ -67,7 +67,7 @@
     }
 
     function frame() {
-      // 01 — the count down from 483 to 18
+      // 01: the count down from 483 to 18
       if (numEl) {
         var p = progress(number);
         var n = Math.round(483 - 465 * easeOut(p));
@@ -75,7 +75,7 @@
         numStick.classList.toggle('is-settled', p > 0.97);
       }
 
-      // 02 — the stamps land in sequence, then the rejected fade away
+      // 02: the stamps land in sequence, then the rejected fade away
       if (jobs.length) {
         var pw = progress(wall);
         var want = Math.floor(clamp((pw - 0.04) / 0.62) * jobs.length);
@@ -87,7 +87,7 @@
         wallStick.classList.toggle('is-cleared', pw > 0.86);
       }
 
-      // 03 — each answer dims another slice of the world
+      // 03: each answer dims another slice of the world
       if (paths.length) {
         var pr = entering(remote, 0.3, -1.2);
         var step = Math.min(6, Math.floor(pr * 7));
@@ -106,7 +106,7 @@
         }
       }
 
-      // 05 — the refusal
+      // 05: the refusal
       if (docSteps.length) {
         var pt = progress(trust);
         docSteps[0].classList.toggle('is-on', pt > 0.22);
