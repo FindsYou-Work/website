@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PRODUCT-NOT%20BUILT-C9503F?style=flat-square&labelColor=0E0B10" alt="Product: not built">
+  <img src="https://img.shields.io/badge/PRODUCT-NOT%20RELEASED-C9503F?style=flat-square&labelColor=0E0B10" alt="Product: not released">
   <img src="https://img.shields.io/badge/PAGES-1-ECE6EA?style=flat-square&labelColor=0E0B10" alt="Pages: 1">
   <img src="https://img.shields.io/badge/STACK-VANILLA%20JS-ECE6EA?style=flat-square&labelColor=0E0B10" alt="Stack: vanilla JS">
   <img src="https://img.shields.io/badge/BUILD%20STEP-NONE-ECE6EA?style=flat-square&labelColor=0E0B10" alt="Build step: none">
@@ -29,9 +29,11 @@ no build step and no runtime dependency. It was designed in Claude Design
 
 ## The rule this site is built around
 
-**Nothing is built.** There is no product, no scan, no document generation. The
-only working thing here is the waitlist. Every capability carries one of two
-labels, and the label sets the tense of the sentence around it.
+**Nothing is released.** The scan, the eligibility filter and the profile exist
+as code in the private product repository, but no module is mounted on the
+public Worker, so nothing here is usable. The only working thing on the site is
+the waitlist. Every capability carries one of two labels, and the label sets the
+tense of the sentence around it.
 
 - **Shipping** — built, deployed, usable now. Present tense allowed only here.
   Today that is: this page, and the waitlist.
