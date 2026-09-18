@@ -166,7 +166,8 @@ page = f'''<!DOCTYPE html>
 <body>
 
 <p class="banner">
-  In design — nothing is built yet. The waitlist is real and is the only thing here that works.
+  Not released — the scan, the filter and the profile exist as code, and none of it is running yet.
+  The waitlist is real and is the only thing here that works.
   <a href="#waitlist">Join it</a>, and you will hear once, when there is something to use.
 </p>
 
@@ -345,7 +346,7 @@ page = f'''<!DOCTYPE html>
   <!-- ------------------------------------------------------- 09 waitlist -->
   <section class="band wrap wait" id="waitlist">
     <h2 class="display" style="font-size:clamp(34px,6vw,84px);max-width:18ch;margin-bottom:28px">You are not bad at applying. You are applying to the wrong jobs.</h2>
-    <p class="lede" style="max-width:52ch">Nothing is built yet. Leave your address and you will hear once &mdash; when there is something to use.</p>
+    <p class="lede" style="max-width:52ch">Nothing is released yet. Leave your address and you will hear once &mdash; when there is something to use.</p>
 
     <form class="wait__form" id="waitlist-form" data-contact="hello@findsyou.work" data-double-opt-in="false" hidden>
       <div class="field">

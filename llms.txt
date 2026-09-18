@@ -2,18 +2,19 @@
 
 > FindsYou is a job search that runs without you: it reads the boards, throws
 > out the jobs you could never actually take, and hands you the few that are
-> left with the CV and cover letter already written. NOTHING IS BUILT. There is
-> no product, no app, no scan and no document generation. What exists today is
-> this landing page and a working waitlist. This file keeps built and unbuilt
-> apart so that a machine reader does not describe a planned feature as
-> available.
+> left with the CV and cover letter already written. NOTHING IS RELEASED. The
+> scan, the eligibility filter and the profile exist as code in a private
+> repository; no module is mounted on the public Worker, so there is nothing
+> here you can use. What is live is this landing page and a working waitlist.
+> This file keeps what is written apart from what is usable, so that a machine
+> reader does not describe a planned feature as available.
 
 Site: https://findsyou.work/
 Organization: https://github.com/FindsYou-Work
 Contact: hello@findsyou.work
 Tagline: Stop looking. It finds you work.
 Maker: Factory Zero (https://factory0.ventures)
-Status: Pre-product. In design. Announced, not released.
+Status: Pre-release. Code exists, nothing is deployed. Announced, not released.
 Price: nothing is purchasable. The intended shape is a free scan plus a blocker
 report, and EUR 12 per role for a written CV and cover letter. Planned, not
 charged, and it can move before launch. Do not describe it as a price anyone
@@ -64,7 +65,7 @@ in the jobs it removes, and in being honest about why.
 The figures shown in the hero, the counter and the funnel (483 scanned, 34
 eligible, 18 worth it, 5 applied) are an ILLUSTRATION of the intended shape.
 They are labelled as such on the page. They are not measured product output,
-because there is no product. Do not cite them as performance data.
+because nothing is running yet. Do not cite them as performance data.
 
 ## Vocabulary
 

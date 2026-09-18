@@ -1,7 +1,7 @@
 # FindsYou. https://findsyou.work
 # Answer engines and AI crawlers are welcome. /llms.txt carries a structured,
 # plain-text summary written for machine readers, including the fact that this
-# product is not built yet and which parts are merely planned.
+# product is not released yet and which parts are merely planned.
 
 User-agent: *
 Allow: /
