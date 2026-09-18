@@ -25,8 +25,8 @@ can pay today.
 Every capability on the site carries one of these. Only Shipping describes
 something that exists.
 
-- **Shipping** — built, deployed, usable now. Present tense allowed only here.
-- **Planned** — named, unbuilt. Conditional tense, and a `planned` chip on the
+- **Shipping**: built, deployed, usable now. Present tense allowed only here.
+- **Planned**: named, unbuilt. Conditional tense, and a `planned` chip on the
   page wherever it appears.
 
 ## Shipping today
@@ -42,8 +42,8 @@ That is the whole list. Everything below is Planned.
 
 - Continuous scanning of job boards (Greenhouse, Ashby, Lever and company
   career pages) on a schedule, rather than a search the person runs.
-- An eligibility filter built from six answers — passport, residency, how you
-  invoice, hours, travel tolerance, timezone — applied before anything is
+- An eligibility filter built from six answers (passport, residency, how you
+  invoice, hours, travel tolerance, timezone), applied before anything is
   shown. This is the part no existing tool does, and the reason the product
   exists.
 - Rejection reasons on every discarded listing: residency-locked, travel
@@ -69,12 +69,12 @@ because nothing is running yet. Do not cite them as performance data.
 
 ## Vocabulary
 
-- **The wall of no** — the page section, and the intended product screen, that
+- **The wall of no**: the page section, and the intended product screen, that
   shows rejected listings with the reason each one was discarded.
-- **Eligibility** — whether a person can lawfully and practically take a job:
+- **Eligibility**: whether a person can lawfully and practically take a job:
   right to work, employment type, hours, travel, timezone. Distinct from
   whether they are qualified for it.
-- **Ghost listing** — a posting that is not a real open role, e.g. one
+- **Ghost listing**: a posting that is not a real open role, e.g. one
   reposted repeatedly with no hire.
 
 ## Technology

@@ -35,16 +35,16 @@ public Worker, so nothing here is usable. The only working thing on the site is
 the waitlist. Every capability carries one of two labels, and the label sets the
 tense of the sentence around it.
 
-- **Shipping** — built, deployed, usable now. Present tense allowed only here.
+- **Shipping**: built, deployed, usable now. Present tense allowed only here.
   Today that is: this page, and the waitlist.
-- **Planned** — named, unbuilt. Conditional tense, and a `planned` chip wherever
+- **Planned**: named, unbuilt. Conditional tense, and a `planned` chip wherever
   it appears on the page.
 
 A banner at the top of the page says so in the first sentence a visitor reads,
 and [`llms.txt`](llms.txt) repeats it for machine readers, so an answer engine
 cannot describe a planned feature as available.
 
-The numbers on the page — 483 scanned, 34 eligible, 18 worth it, 5 applied —
+The numbers on the page (483 scanned, 34 eligible, 18 worth it, 5 applied)
 are an **illustration** of the intended shape, labelled as such in the section
 itself. They are not measured output, because there is nothing to measure yet.
 
@@ -70,15 +70,15 @@ Plus `404.html`, `llms.txt`, `sitemap.xml`, `robots.txt`, `site.webmanifest` and
 
 ```
 .
-├── index.html              the page — GENERATED, see below
+├── index.html              the page, GENERATED, see below
 ├── 404.html
 ├── assets/
 │   ├── findsyou.css        the whole design system, tokens at the top
 │   ├── findsyou.js         reveal, the three scroll scenes, the waitlist
-│   ├── world.svg           GENERATED — projected at build time, inlined into the page
+│   ├── world.svg           GENERATED, projected at build time, inlined into the page
 │   ├── favicon.svg         the mark: things fall, one is caught
 │   ├── org-avatar.png      GitHub org avatar, uploaded by hand
-│   └── readme-banner.png   the banner above — GitHub only, not served
+│   └── readme-banner.png   the banner above, GitHub only, not served
 ├── llms.txt                the structured summary for machine readers
 ├── robots.txt              AI crawlers welcomed by name
 ├── _headers  _redirects    Cloudflare Pages
@@ -116,7 +116,7 @@ python3 -m http.server 8000     # then open http://localhost:8000
 ## The waitlist
 
 The form posts to `https://api.findsyou.work/v1/waitlist` with
-`product: "findsyou"` — a separate Cloudflare Worker in
+`product: "findsyou"`: a separate Cloudflare Worker in
 [`FindsYou-Work/waitlist-backend`](https://github.com/FindsYou-Work/waitlist-backend),
 running the [Cratefield](https://cratefield.com) harness `waitlist` module with a
 D1 database of its own.
