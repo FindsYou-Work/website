@@ -3,6 +3,9 @@
 # tools/build-dist.sh, so the URL changes whenever the file does.
 
 /*
+  # no includeSubDomains: this file only speaks for what Pages serves, and the
+  # www redirect is a zone rule that never sees these headers.
+  Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
