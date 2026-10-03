@@ -3,17 +3,22 @@
 # tools/build-dist.sh, so the URL changes whenever the file does.
 
 /*
-  # no includeSubDomains: this file only speaks for what Pages serves, and the
-  # www redirect is a zone rule that never sees these headers.
+  # No includeSubDomains: this file only speaks for what Pages serves.
+  # www.findsyou.work currently serves the page itself rather than redirecting
+  # (FindsYou-Work/waitlist-backend#4 tracks the www -> apex Redirect Rule).
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  X-Frame-Options: SAMEORIGIN
+  X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
-  # Scripts and frames only: the page's own, plus Cloudflare Turnstile, the
-  # human check on the waitlist form (api.js and its challenge iframe).
-  # Cloudflare's /cdn-cgi/ email-decode script is same-origin, so 'self' covers it.
-  Content-Security-Policy: script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com
+  # Content-Security-Policy, no 'unsafe-inline' anywhere:
+  # - script-src: our own JS (Cloudflare's /cdn-cgi/ email-decode script is
+  #   same-origin) and Cloudflare Turnstile's api.js. The pages have no inline script.
+  # - style-src: our CSS (the former style="" attributes live in
+  #   assets/findsyou-inline.css; tools/build-page.py regenerates it through
+  #   tools/csp-inline-styles.py) and Google Fonts' stylesheet; font-src: its files.
+  # - connect-src: the waitlist Worker only. frame-src: the Turnstile challenge.
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src https://api.findsyou.work; frame-src https://challenges.cloudflare.com; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
 
 /assets/*.css
   Cache-Control: public, max-age=31536000, immutable

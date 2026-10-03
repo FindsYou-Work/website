@@ -147,9 +147,19 @@ The page says so in words when the check is refused, and when the Turnstile
 script cannot load (a content blocker, usually), pointing at the mail address
 instead. The widget is reset after every attempt: a token is good once.
 
-`_headers` sets a Content-Security-Policy that limits scripts and frames to the
-site itself and `https://challenges.cloudflare.com`, which is all Turnstile
-needs.
+**Content-Security-Policy.** `_headers` sends a strict policy with no
+`'unsafe-inline'`: `default-src 'self'`, `frame-ancestors 'none'`,
+`object-src 'none'`, `base-uri 'self'`, and every other directive limited to
+what the pages actually load (see the comments in `_headers`). Turnstile is the
+only third party in `script-src` and `frame-src`, and `connect-src` is the
+waitlist Worker alone. Two things keep it that way, and
+`tools/build-dist.sh` refuses to build when either drifts:
+
+- an inline `<script>` is allowed only by its sha256 in `_headers`; and
+- no page may carry a `style=""` attribute. Write the style, then run
+  `python3 tools/build-page.py` (it runs `tools/csp-inline-styles.py` last): it moves every attribute into
+  `assets/findsyou-inline.css` as a class. Each rule weighs as much as the inline
+  style did, so the look does not change.
 
 **www.** The Worker binds one hostname, the apex. A check solved on
 `www.findsyou.work` is refused as `hostname-mismatch` until `www` redirects to

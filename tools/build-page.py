@@ -408,3 +408,8 @@ print(f'index.html written · {len(page):,} bytes · {N_CARDS} wall cards, {len(
 # registry's entry for this venture), so it survives every rebuild of the page.
 import subprocess, sys
 subprocess.run([sys.executable, 'tools/built-with.py'], check=True)
+
+# The CSP has no 'unsafe-inline' for styles: move the style="" attributes this
+# page was generated with into assets/findsyou-inline.css (and 404.html's too).
+import subprocess, sys
+subprocess.run([sys.executable, 'tools/csp-inline-styles.py'], check=True)
