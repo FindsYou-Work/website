@@ -15,6 +15,33 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# The Content-Security-Policy in _headers has no 'unsafe-inline'. Refuse to build
+# when a page carries something it would block: a style="" attribute (run
+# tools/csp-inline-styles.py), or an inline <script> whose sha256 is not in
+# _headers.
+python3 tools/csp-inline-styles.py --check
+python3 - <<'EOF'
+import base64, hashlib, re, sys
+headers = open('_headers').read()
+bad = 0
+for page in ('index.html', '404.html'):
+    text = open(page).read()
+    for attrs, body in re.findall(r'<script([^>]*)>(.*?)</script>', text, re.S):
+        if 'src=' in attrs or 'application/ld+json' in attrs:
+            continue
+        h = 'sha256-' + base64.b64encode(hashlib.sha256(body.encode()).digest()).decode()
+        if f"'{h}'" not in headers:
+            print(f"CSP in _headers does not allow the inline script in {page} ('{h}')", file=sys.stderr)
+            bad = 1
+    if re.search(r'\sstyle="', text):
+        print(f'{page} has a style="" attribute, which the CSP blocks', file=sys.stderr)
+        bad = 1
+    if re.search(r'\son[a-z]+="', text):
+        print(f'{page} has an inline event handler, which the CSP blocks', file=sys.stderr)
+        bad = 1
+sys.exit(bad)
+EOF
+
 rm -rf dist
 mkdir -p dist
 
@@ -43,7 +70,7 @@ hash_of() {
   else shasum -a 256 "$1" | cut -c1-8; fi
 }
 
-for f in findsyou.css findsyou.js; do
+for f in findsyou.css findsyou-inline.css findsyou.js; do
   h=$(hash_of "dist/assets/$f")
   # `sed -i` is not portable: GNU takes no argument, BSD demands one.
   find dist -name '*.html' | while IFS= read -r page; do

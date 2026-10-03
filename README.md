@@ -22,7 +22,8 @@
 
 This repository is the marketing site for **FindsYou**: one page, one stylesheet
 and one script, served by Cloudflare Pages. There is no framework, no bundler,
-no build step and no runtime dependency. It was designed in Claude Design
+no build step and no runtime dependency except Cloudflare Turnstile, the human
+check on the waitlist form. It was designed in Claude Design
 (`FindsYou Landing.dc.html`) and ported to static HTML.
 
 > **Stop looking. It finds you work.**
@@ -136,6 +137,33 @@ D1 database of its own.
 The form is rendered `hidden` and revealed by JavaScript. A browser without JS
 is shown a mail fallback instead of a control that cannot work. A honeypot field
 catches bots, and tells them nothing.
+
+Every join also carries a [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/)
+token, sent as `captchaToken`. The widget (site key `0x4AAAAAAFM4KC2DoEjSoBx_`,
+action `waitlist`, rendered explicitly by `assets/findsyou.js`) sits under the
+address field; the Worker verifies the token against `findsyou.work` and that
+action, and refuses a join without one (`400`, problem type `captcha-failed`).
+The page says so in words when the check is refused, and when the Turnstile
+script cannot load (a content blocker, usually), pointing at the mail address
+instead. The widget is reset after every attempt: a token is good once.
+
+**Content-Security-Policy.** `_headers` sends a strict policy with no
+`'unsafe-inline'`: `default-src 'self'`, `frame-ancestors 'none'`,
+`object-src 'none'`, `base-uri 'self'`, and every other directive limited to
+what the pages actually load (see the comments in `_headers`). Turnstile is the
+only third party in `script-src` and `frame-src`, and `connect-src` is the
+waitlist Worker alone. Two things keep it that way, and
+`tools/build-dist.sh` refuses to build when either drifts:
+
+- an inline `<script>` is allowed only by its sha256 in `_headers`; and
+- no page may carry a `style=""` attribute. Write the style, then run
+  `python3 tools/build-page.py` (it runs `tools/csp-inline-styles.py` last): it moves every attribute into
+  `assets/findsyou-inline.css` as a class. Each rule weighs as much as the inline
+  style did, so the look does not change.
+
+**www.** The Worker binds one hostname, the apex. A check solved on
+`www.findsyou.work` is refused as `hostname-mismatch` until `www` redirects to
+the apex (a Cloudflare Redirect Rule on the zone).
 
 ## Deploy
 
