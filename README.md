@@ -105,6 +105,18 @@ Python, so the page ships **no d3, no topojson and no CDN call**. The design
 canvas loaded ~300 KB of mapping libraries at runtime; this does the same work
 once, at build time, for 27 KB gzipped.
 
+### The "Built with" strip
+
+The footer line naming what findsyou.work is built with (Cratefield, live: the
+waitlist Worker; Owlpost, Stripe, SupportGenius and Keep Shipping, planned;
+Cloudflare, live) comes from the Factory Zero registry: this venture's `uses`
+in `Factory-Zero/website` `assets/fz-data.js`, published as
+`https://factory0.ventures/stack.json` and vendored in `tools/built-with.json`.
+`tools/built-with.py` writes it between the `built-with` markers, and
+`build-page.py` runs it after every rebuild. When the registry changes, run
+`python3 tools/built-with.py --pull`; never edit the strip or the JSON by hand.
+Planned entries carry "(planned)", the same rule as the rest of the page.
+
 ## Development
 
 There is no build step and no server requirement beyond static files:

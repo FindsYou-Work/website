@@ -388,6 +388,7 @@ page = f'''<!DOCTYPE html>
       <a href="/sitemap.xml">sitemap.xml</a>
       <a href="/.well-known/security.txt">security.txt</a>
     </div>
+    <!-- built-with:start --><!-- built-with:end -->
     <p class="foot__base">findsyou.work &middot; a <a href="https://factory0.ventures">Factory Zero</a> venture &middot; &copy; 2026</p>
   </div>
 </footer>
@@ -399,3 +400,8 @@ page = f'''<!DOCTYPE html>
 
 pathlib.Path('index.html').write_text(page, encoding='utf-8')
 print(f'index.html written · {len(page):,} bytes · {N_CARDS} wall cards, {len(KEEP)} kept')
+
+# The "Built with" strip is filled from tools/built-with.json (the Factory Zero
+# registry's entry for this venture), so it survives every rebuild of the page.
+import subprocess, sys
+subprocess.run([sys.executable, 'tools/built-with.py'], check=True)

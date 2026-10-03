@@ -88,6 +88,14 @@ because nothing is running yet. Do not cite them as performance data.
   a D1 database of its own.
 - Designed in Claude Design and ported to static HTML by hand.
 
+## Built with
+
+In use today: the Cratefield harness (the waitlist Worker) and Cloudflare
+(hosting). Planned, not in use yet: Owlpost (email; no mail is sent today),
+Stripe (payments; nothing is on sale), SupportGenius (bug reports) and Keep
+Shipping (deploys). From the Factory Zero registry:
+https://factory0.ventures/stack.json
+
 ## Links
 
 - Waitlist: https://findsyou.work/#waitlist
