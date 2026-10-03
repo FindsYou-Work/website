@@ -129,16 +129,30 @@
   /* --------------------------------------------------------------- waitlist
      Posts to the Cratefield harness waitlist module running at
      api.findsyou.work. The form is rendered hidden and only revealed here, so
-     a browser without fetch is shown the mail fallback instead of a dead form. */
+     a browser without fetch is shown the mail fallback instead of a dead form.
+
+     Every join carries a Cloudflare Turnstile token as `captchaToken`; the
+     Worker verifies it (bound to findsyou.work and the `waitlist` action) and
+     refuses a join without one. The widget script is loaded from here, not
+     from a <script> tag, so a blocked or failing load can be told apart and
+     said out loud. Tokens are single-use: the widget is reset after every
+     attempt, whatever the answer. */
   (function () {
     var form = document.getElementById('waitlist-form');
     var status = document.getElementById('waitlist-status');
-    if (!form || !status || !window.fetch) return;
+    var slot = document.getElementById('waitlist-captcha');
+    if (!form || !status || !slot || !window.fetch) return;
 
     var contact = form.getAttribute('data-contact');
     var doubleOptIn = form.getAttribute('data-double-opt-in') === 'true';
     var button = form.querySelector('button[type="submit"]');
     var label = button.textContent;
+
+    var TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=findsyouTurnstileReady';
+    var LOAD_TIMEOUT_MS = 10000;
+    var widget = null;      // the Turnstile widget id, once rendered
+    var token = null;       // the current, unspent token
+    var loadFailed = false;
 
     form.hidden = false;
     var fallback = document.querySelector('[data-waitlist-nojs]');
@@ -164,6 +178,47 @@
       button.textContent = label;
       settle(headline, message);
     }
+    function unavailable() {
+      loadFailed = true;
+      if (slot.parentNode) slot.parentNode.hidden = true;   // no empty box where the check should be
+      settle('the human check did not load.', 'something (often a content blocker) stopped challenges.cloudflare.com. allow it and reload the page, or email ' + contact + ' and we will add you by hand.');
+    }
+    // A token is good once. Spend it, then ask Turnstile for a fresh one.
+    function spend() {
+      token = null;
+      if (widget !== null && window.turnstile) window.turnstile.reset(widget);
+    }
+
+    window.findsyouTurnstileReady = function () {
+      if (loadFailed || !window.turnstile) return;
+      widget = window.turnstile.render(slot, {
+        sitekey: slot.getAttribute('data-sitekey'),
+        action: slot.getAttribute('data-action'),
+        theme: 'dark',
+        size: 'flexible',
+        callback: function (value) { token = value; },
+        'expired-callback': function () { token = null; },
+        'timeout-callback': function () { token = null; },
+        'error-callback': function () {
+          token = null;
+          settle('the human check hit a snag.', 'it will try again on its own. if it keeps failing, reload the page, or email ' + contact + '.');
+        }
+      });
+    };
+
+    var script = document.createElement('script');
+    script.src = TURNSTILE_SRC;
+    script.async = true;
+    script.defer = true;
+    script.onerror = unavailable;
+    document.head.appendChild(script);
+    setTimeout(function () { if (!window.turnstile && !loadFailed) unavailable(); }, LOAD_TIMEOUT_MS);
+
+    function isCaptchaRefusal(res) {
+      return res.json().then(function (problem) {
+        return !!(problem && typeof problem.type === 'string' && /\/captcha-failed$/.test(problem.type));
+      }, function () { return false; });
+    }
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -173,22 +228,44 @@
       // Honeypot: people leave it empty. A bot that fills it learns nothing.
       if ((form.elements.company.value || '').trim()) { joined(email); return; }
 
+      if (loadFailed || !window.turnstile) {
+        unavailable();
+        return;
+      }
+      if (!token) {
+        settle('one more step.', 'complete the human check below the address, then join again.');
+        var frame = slot.querySelector('iframe');
+        if (frame) frame.focus();
+        return;
+      }
+
+      var captchaToken = token;
       button.disabled = true;
       button.textContent = 'joining…';
 
       fetch('https://api.findsyou.work/v1/waitlist', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email: email, product: 'findsyou' })
+        body: JSON.stringify({ email: email, product: 'findsyou', captchaToken: captchaToken })
       }).then(function (res) {
-        if (res.ok) joined(email);
-        else if (res.status === 400 || res.status === 422)
+        spend();
+        if (res.ok) { joined(email); return; }
+        if (res.status === 400) {
+          return isCaptchaRefusal(res).then(function (captcha) {
+            if (captcha)
+              retry('not verified.', 'the human check did not go through. complete it again and join again, or email ' + contact + '.');
+            else
+              retry('not added.', 'that address did not look right. check it and try again, or email ' + contact + '.');
+          });
+        }
+        if (res.status === 422)
           retry('not added.', 'that address did not look right. check it and try again, or email ' + contact + '.');
         else if (res.status === 429)
           retry('too many tries.', 'wait a moment and try again, or email ' + contact + '.');
         else
           retry('could not reach the list.', 'try again in a moment, or email ' + contact + ' and we will add you by hand.');
       }, function () {
+        spend();
         retry('could not reach the list.', 'try again in a moment, or email ' + contact + ' and we will add you by hand.');
       });
     });

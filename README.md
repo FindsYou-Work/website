@@ -22,7 +22,8 @@
 
 This repository is the marketing site for **FindsYou**: one page, one stylesheet
 and one script, served by Cloudflare Pages. There is no framework, no bundler,
-no build step and no runtime dependency. It was designed in Claude Design
+no build step and no runtime dependency except Cloudflare Turnstile, the human
+check on the waitlist form. It was designed in Claude Design
 (`FindsYou Landing.dc.html`) and ported to static HTML.
 
 > **Stop looking. It finds you work.**
@@ -136,6 +137,23 @@ D1 database of its own.
 The form is rendered `hidden` and revealed by JavaScript. A browser without JS
 is shown a mail fallback instead of a control that cannot work. A honeypot field
 catches bots, and tells them nothing.
+
+Every join also carries a [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/)
+token, sent as `captchaToken`. The widget (site key `0x4AAAAAAFM4KC2DoEjSoBx_`,
+action `waitlist`, rendered explicitly by `assets/findsyou.js`) sits under the
+address field; the Worker verifies the token against `findsyou.work` and that
+action, and refuses a join without one (`400`, problem type `captcha-failed`).
+The page says so in words when the check is refused, and when the Turnstile
+script cannot load (a content blocker, usually), pointing at the mail address
+instead. The widget is reset after every attempt: a token is good once.
+
+`_headers` sets a Content-Security-Policy that limits scripts and frames to the
+site itself and `https://challenges.cloudflare.com`, which is all Turnstile
+needs.
+
+**www.** The Worker binds one hostname, the apex. A check solved on
+`www.findsyou.work` is refused as `hostname-mismatch` until `www` redirects to
+the apex (a Cloudflare Redirect Rule on the zone).
 
 ## Deploy
 

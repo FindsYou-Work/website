@@ -34,7 +34,8 @@ something that exists.
 - This landing page. Static HTML, one stylesheet, one script, no build step.
 - The waitlist. A Cloudflare Worker on the Cratefield harness `waitlist`
   module, at api.findsyou.work, with its own D1 database. It records an address
-  and nothing else.
+  and nothing else. Joining takes a Cloudflare Turnstile human check on the
+  form; the Worker refuses a join without a valid check.
 
 That is the whole list. Everything below is Planned.
 
@@ -80,7 +81,8 @@ because nothing is running yet. Do not cite them as performance data.
 ## Technology
 
 - Site: hand-written HTML, CSS and vanilla JavaScript. No framework, no
-  bundler, no build step, no runtime dependency. Deployed on Cloudflare Pages.
+  bundler, no build step. Deployed on Cloudflare Pages. The one third-party
+  script is Cloudflare Turnstile, the human check on the waitlist form.
 - The world map is projected to a plain SVG at build time, so the page loads no
   mapping library.
 - Waitlist: Rust, compiled to WebAssembly, on the Cratefield harness

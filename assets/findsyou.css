@@ -298,6 +298,8 @@ findsyou-map { display: block; min-height: 220px; }
 }
 .field input::placeholder { color: var(--dimmer); }
 .field input:focus { border-color: var(--accent); outline: none; }
+/* Turnstile renders its own iframe here; the reserved height stops the form jumping when it arrives. */
+.captcha { margin-top: 12px; min-height: 65px; max-width: 560px; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form__foot { font-family: var(--mono); font-size: 12px; color: var(--dimmer); margin-top: 12px; }
 .form__foot a { color: var(--dim); text-decoration: underline; text-underline-offset: 3px; }

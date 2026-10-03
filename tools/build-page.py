@@ -355,7 +355,10 @@ page = f'''<!DOCTYPE html>
         <button class="btn" type="submit">Join the waitlist</button>
       </div>
       <p class="hp" aria-hidden="true"><label>company <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
-      <p class="form__foot">kept by the <a href="https://cratefield.com">cratefield</a> waitlist module, in a database of its own.</p>
+      <div class="captcha" role="group" aria-label="human check">
+        <div id="waitlist-captcha" data-sitekey="0x4AAAAAAFM4KC2DoEjSoBx_" data-action="waitlist"></div>
+      </div>
+      <p class="form__foot">a quick human check by <a href="https://www.cloudflare.com/products/turnstile/">cloudflare turnstile</a>, then kept by the <a href="https://cratefield.com">cratefield</a> waitlist module, in a database of its own.</p>
     </form>
     <p class="lede" data-waitlist-nojs style="margin-top:24px">Email <a href="mailto:hello@findsyou.work?subject=FindsYou%20waitlist" style="text-decoration:underline;text-underline-offset:3px">hello@findsyou.work</a> and we will add you by hand.</p>
     <div class="form__status" id="waitlist-status" role="status" aria-live="polite"></div>
