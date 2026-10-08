@@ -136,7 +136,13 @@
      refuses a join without one. The widget script is loaded from here, not
      from a <script> tag, so a blocked or failing load can be told apart and
      said out loud. Tokens are single-use: the widget is reset after every
-     attempt, whatever the answer. */
+     attempt, whatever the answer.
+
+     The Worker mails a double opt-in link, so a join ends on a "check your
+     inbox" panel (#waitlist-done) that names the address, takes focus and is
+     announced. The API answers the same 202 whether the address is new,
+     pending or already confirmed, so the panel says confirmed people are
+     already in. "Use a different email" brings the form back, prefilled. */
   (function () {
     var form = document.getElementById('waitlist-form');
     var status = document.getElementById('waitlist-status');
@@ -144,9 +150,11 @@
     if (!form || !status || !slot || !window.fetch) return;
 
     var contact = form.getAttribute('data-contact');
-    var doubleOptIn = form.getAttribute('data-double-opt-in') === 'true';
+    var done = document.getElementById('waitlist-done');
+    var input = form.elements.email;
     var button = form.querySelector('button[type="submit"]');
-    var label = button.textContent;
+    var labelEl = button.querySelector('[data-label]');
+    var label = labelEl.textContent;
 
     var TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=findsyouTurnstileReady';
     var LOAD_TIMEOUT_MS = 10000;
@@ -165,19 +173,38 @@
       status.appendChild(strong);
       status.appendChild(document.createTextNode(' ' + message));
     }
+    function busy(on) {
+      button.disabled = on;
+      if (on) button.setAttribute('aria-busy', 'true'); else button.removeAttribute('aria-busy');
+      labelEl.textContent = on ? 'joining…' : label;
+    }
+    function badEmail() {
+      busy(false);
+      input.setAttribute('aria-invalid', 'true');
+      settle('not added.', 'that email address doesn’t look right. check it and try again.');
+      input.focus();
+    }
     function joined(email) {
+      busy(false);
+      status.textContent = '';
       form.hidden = true;
-      if (doubleOptIn) {
-        settle('check your inbox.', 'we sent a confirmation link to ' + email + '. click it to hold your place.');
-      } else {
-        settle('you’re on the list.', 'we will write to ' + email + ' once, when there is something to use.');
-      }
+      done.querySelector('[data-done-email]').textContent = email;
+      done.hidden = false;
+      done.focus();
     }
     function retry(headline, message) {
-      button.disabled = false;
-      button.textContent = label;
+      busy(false);
       settle(headline, message);
     }
+    done.querySelector('[data-again]').addEventListener('click', function () {
+      done.hidden = true;
+      form.hidden = false;
+      input.focus();
+      input.select();
+    });
+    input.addEventListener('input', function () {
+      if (input.getAttribute('aria-invalid') === 'true') { input.removeAttribute('aria-invalid'); status.textContent = ''; }
+    });
     function unavailable() {
       loadFailed = true;
       if (slot.parentNode) slot.parentNode.hidden = true;   // no empty box where the check should be
@@ -222,8 +249,9 @@
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
-      var email = (form.elements.email.value || '').trim();
-      if (!email) return;
+      var email = (input.value || '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { badEmail(); return; }
+      input.removeAttribute('aria-invalid');
 
       // Honeypot: people leave it empty. A bot that fills it learns nothing.
       if ((form.elements.company.value || '').trim()) { joined(email); return; }
@@ -240,8 +268,8 @@
       }
 
       var captchaToken = token;
-      button.disabled = true;
-      button.textContent = 'joining…';
+      busy(true);
+      status.textContent = '';
 
       fetch('https://api.findsyou.work/v1/waitlist', {
         method: 'POST',
@@ -253,20 +281,20 @@
         if (res.status === 400) {
           return isCaptchaRefusal(res).then(function (captcha) {
             if (captcha)
-              retry('not verified.', 'the human check did not go through. complete it again and join again, or email ' + contact + '.');
+              retry('not verified.', 'the human check didn’t go through. it’s been reset — complete it again, then join.');
             else
-              retry('not added.', 'that address did not look right. check it and try again, or email ' + contact + '.');
+              badEmail();
           });
         }
         if (res.status === 422)
-          retry('not added.', 'that address did not look right. check it and try again, or email ' + contact + '.');
+          badEmail();
         else if (res.status === 429)
-          retry('too many tries.', 'wait a moment and try again, or email ' + contact + '.');
+          retry('too many tries.', 'wait a minute, then try again.');
         else
-          retry('could not reach the list.', 'try again in a moment, or email ' + contact + ' and we will add you by hand.');
+          retry('could not reach the waitlist.', 'try again in a moment, or email ' + contact + '.');
       }, function () {
         spend();
-        retry('could not reach the list.', 'try again in a moment, or email ' + contact + ' and we will add you by hand.');
+        retry('could not reach the waitlist.', 'try again in a moment, or email ' + contact + '.');
       });
     });
   })();

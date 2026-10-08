@@ -348,11 +348,11 @@ page = f'''<!DOCTYPE html>
     <h2 class="display" style="font-size:clamp(34px,6vw,84px);max-width:18ch;margin-bottom:28px">You are not bad at applying. You are applying to the wrong jobs.</h2>
     <p class="lede" style="max-width:52ch">Nothing is released yet. Leave your address and you will hear once, when there is something to use.</p>
 
-    <form class="wait__form" id="waitlist-form" data-contact="hello@findsyou.work" data-double-opt-in="false" hidden>
+    <form class="wait__form" id="waitlist-form" data-contact="hello@findsyou.work" hidden>
       <div class="field">
         <label class="sr-only" for="waitlist-email">email address</label>
-        <input id="waitlist-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com">
-        <button class="btn" type="submit">Join the waitlist</button>
+        <input id="waitlist-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" aria-describedby="waitlist-status">
+        <button class="btn" type="submit"><span class="spin" aria-hidden="true"></span><span data-label>Join the waitlist</span></button>
       </div>
       <p class="hp" aria-hidden="true"><label>company <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
       <div class="captcha" role="group" aria-label="human check">
@@ -361,7 +361,13 @@ page = f'''<!DOCTYPE html>
       <p class="form__foot">a quick human check by <a href="https://www.cloudflare.com/products/turnstile/">cloudflare turnstile</a>, then kept by the <a href="https://cratefield.com">cratefield</a> waitlist module, in a database of its own.</p>
     </form>
     <p class="lede" data-waitlist-nojs style="margin-top:24px">Email <a href="mailto:hello@findsyou.work?subject=FindsYou%20waitlist" style="text-decoration:underline;text-underline-offset:3px">hello@findsyou.work</a> and we will add you by hand.</p>
-    <div class="form__status" id="waitlist-status" role="status" aria-live="polite"></div>
+    <div class="form__status" id="waitlist-status" role="alert"></div>
+    <div class="wait__done" id="waitlist-done" role="status" aria-live="polite" tabindex="-1" hidden>
+      <p class="wait__done-h">Check your inbox.</p>
+      <p>We sent a confirmation link to <strong data-done-email></strong>. Click it to hold your place on the FindsYou waitlist.</p>
+      <p class="wait__small">It can take a minute — check Spam or Promotions if it isn’t there. Already confirmed before? Then you’re already on the list; nothing more to do.</p>
+      <p class="wait__small"><button class="wait__again" type="button" data-again>Use a different email</button> · Still nothing? Email <a href="mailto:hello@findsyou.work?subject=FindsYou%20waitlist">hello@findsyou.work</a>.</p>
+    </div>
   </section>
 
 </main>
