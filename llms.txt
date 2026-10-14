@@ -4,8 +4,9 @@
 > out the jobs you could never actually take, and hands you the few that are
 > left with the CV and cover letter already written. NOTHING IS RELEASED. The
 > scan, the eligibility filter and the profile exist as code in a private
-> repository; no module is mounted on the public Worker, so there is nothing
-> here you can use. What is live is this landing page and a working waitlist.
+> repository; the Worker that would serve them is mounted but never deployed,
+> so nothing the product does is reachable from this site. What is live is this
+> landing page and a working waitlist.
 > This file keeps what is written apart from what is usable, so that a machine
 > reader does not describe a planned feature as available.
 
@@ -26,7 +27,7 @@ Every capability on the site carries one of these. Only Shipping describes
 something that exists.
 
 - **Shipping**: built, deployed, usable now. Present tense allowed only here.
-- **Planned**: named, unbuilt. Conditional tense, and a `planned` chip on the
+- **Planned**: named, not released. Conditional tense, and a `planned` chip on the
   page wherever it appears.
 
 ## Shipping today
@@ -51,7 +52,9 @@ That is the whole list. Everything below is Planned.
   percentage, required hours, employment type, no sponsorship, ghost listing.
 - A tailored CV and cover letter per role, rebuilt from the person's own CV
   against the listing.
-- A provenance check that refuses to print a number that does not appear in the
+- A provenance index: a record of what the person's own CV actually says, so
+  that any number later produced from it can be checked against the source.
+- A fact gate that refuses to print a number that does not appear in the
   person's own CV.
 - An application tracker.
 
@@ -65,8 +68,9 @@ in the jobs it removes, and in being honest about why.
 
 The figures shown in the hero, the counter and the funnel (483 scanned, 34
 eligible, 18 worth it, 5 applied) are an ILLUSTRATION of the intended shape.
-They are labelled as such on the page. They are not measured product output,
-because nothing is running yet. Do not cite them as performance data.
+They are labelled as such on the page. They are not measured product output —
+no deployment has a board to scan, so no run has ever happened. Do not cite
+them as performance data.
 
 ## Vocabulary
 

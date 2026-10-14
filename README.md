@@ -31,15 +31,15 @@ check on the waitlist form. It was designed in Claude Design
 ## The rule this site is built around
 
 **Nothing is released.** The scan, the eligibility filter and the profile exist
-as code in the private product repository, but no module is mounted on the
-public Worker, so nothing here is usable. The only working thing on the site is
-the waitlist. Every capability carries one of two labels, and the label sets the
-tense of the sentence around it.
+as code in the private product repository, but the Worker that would serve them
+is mounted and never deployed, so nothing the product does is reachable from
+this site. The only working thing on the site is the waitlist. Every capability
+carries one of two labels, and the label sets the tense of the sentence around it.
 
 - **Shipping**: built, deployed, usable now. Present tense allowed only here.
   Today that is: this page, and the waitlist.
-- **Planned**: named, unbuilt. Conditional tense, and a `planned` chip wherever
-  it appears on the page.
+- **Planned**: named, not released. Conditional tense, and a `planned` chip
+  wherever it appears on the page.
 
 A banner at the top of the page says so in the first sentence a visitor reads,
 and [`llms.txt`](llms.txt) repeats it for machine readers, so an answer engine
@@ -47,7 +47,8 @@ cannot describe a planned feature as available.
 
 The numbers on the page (483 scanned, 34 eligible, 18 worth it, 5 applied)
 are an **illustration** of the intended shape, labelled as such in the section
-itself. They are not measured output, because there is nothing to measure yet.
+itself. They are not measured output — no deployment has a board to scan, so no
+run has ever happened.
 
 ## The page
 
