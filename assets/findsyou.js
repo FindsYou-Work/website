@@ -126,6 +126,23 @@
     frame();
   })();
 
+  /* ------------------------------------------------------------ the film
+     The button is a plain link to #film (the film section), so without JS it
+     still lands on the player. With JS it also starts playback. */
+  (function () {
+    var triggers = document.querySelectorAll('[data-play-film]');
+    Array.prototype.forEach.call(triggers, function (trigger) {
+      trigger.addEventListener('click', function () {
+        var video = document.querySelector('#film video');
+        if (!video || !video.play) return;
+        try {
+          var played = video.play();
+          if (played && played.catch) played.catch(function () { /* the controls still work */ });
+        } catch (err) { /* the controls still work */ }
+      });
+    });
+  })();
+
   /* --------------------------------------------------------------- waitlist
      Posts to the Cratefield harness waitlist module running at
      api.findsyou.work. The form is rendered hidden and only revealed here, so
