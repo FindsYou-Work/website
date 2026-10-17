@@ -101,6 +101,19 @@ section { position: relative; }
 .hero .lede { max-width: 520px; margin-bottom: 34px; }
 .hero__kicker { margin-bottom: 26px; }
 .hero__kicker b { color: var(--accent); font-weight: 400; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* The film: a 16:9 player in the card style of the page. */
+.film-band { border-top: 1px solid var(--line); }
+.film__h { margin: 20px 0 22px; max-width: 22ch; }
+.film__lede { max-width: 56ch; margin-bottom: 22px; }
+.film__status { margin-bottom: 36px; }
+.film { margin: 0; max-width: 960px; }
+.film video {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+  background: #000; border: 1px solid var(--line); border-radius: 4px;
+}
+.film figcaption { margin-top: 14px; font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--dim); max-width: 72ch; }
 
 /* the rain of listings — decorative, hidden from assistive tech */
 .rain { position: absolute; inset: 0; pointer-events: none; overflow: hidden; container-type: size; }
