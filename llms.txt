@@ -96,11 +96,11 @@ them as performance data.
 
 ## Built with
 
-In use today: the Cratefield harness (the waitlist Worker) and Cloudflare
-(hosting). Planned, not in use yet: Owlpost (email; no mail is sent today),
-Stripe (payments; nothing is on sale), SupportGenius (bug reports) and Keep
-Shipping (deploys). From the Factory Zero registry:
-https://factory0.ventures/stack.json
+In use today: the Cratefield harness (the waitlist Worker), Cloudflare
+(hosting) and Google Fonts (the typefaces). Planned, not in use yet: Owlpost
+(email; no mail is sent today), Stripe (payments; nothing is on sale),
+SupportGenius (bug reports) and Keep Shipping (deploys). From the Factory Zero
+registry: https://factory0.ventures/stack.json
 
 ## Links
 

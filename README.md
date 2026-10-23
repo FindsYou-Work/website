@@ -111,7 +111,8 @@ once, at build time, for 27 KB gzipped.
 
 The footer line naming what findsyou.work is built with (Cratefield, live: the
 waitlist Worker; Owlpost, Stripe, SupportGenius and Keep Shipping, planned;
-Cloudflare, live) comes from the Factory Zero registry: this venture's `uses`
+Google Fonts, live: the typefaces; Cloudflare, live) comes from the Factory Zero
+registry: this venture's `uses`
 in `Factory-Zero/website` `assets/fz-data.js`, published as
 `https://factory0.ventures/stack.json` and vendored in `tools/built-with.json`.
 `tools/built-with.py` writes it between the `built-with` markers, and
