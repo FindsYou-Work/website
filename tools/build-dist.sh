@@ -11,7 +11,7 @@
 #
 # There is no functions/ directory: the waitlist posts to api.findsyou.work,
 # a separate worker (FindsYou-Work/waitlist-backend). Deploy from the repo root:
-#     ./tools/build-dist.sh && npx wrangler pages deploy dist --project-name=findsyou
+#     ./tools/build-dist.sh && bunx wrangler pages deploy dist --project-name=findsyou
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
