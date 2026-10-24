@@ -415,6 +415,7 @@ page = f'''<!DOCTYPE html>
       <a href="/sitemap.xml">sitemap.xml</a>
       <a href="/.well-known/security.txt">security.txt</a>
     </div>
+    <a href="https://factory0.ventures/ventures/findsyou-work/"><img src="https://factory0.ventures/badge/findsyou-work.svg" alt="In development · a Factory Zero venture" height="22"></a>
     <!-- built-with:start --><!-- built-with:end -->
     <p class="foot__base">findsyou.work &middot; a <a href="https://factory0.ventures">Factory Zero</a> venture &middot; &copy; 2026</p>
   </div>
