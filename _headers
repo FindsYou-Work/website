@@ -18,7 +18,7 @@
   #   assets/findsyou-inline.css; tools/build-page.py regenerates it through
   #   tools/csp-inline-styles.py) and Google Fonts' stylesheet; font-src: its files.
   # - connect-src: the waitlist Worker only. frame-src: the Turnstile challenge.
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src https://api.findsyou.work; frame-src https://challenges.cloudflare.com; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://factory0.ventures; connect-src https://api.findsyou.work; frame-src https://challenges.cloudflare.com; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
 
 /assets/*.css
   Cache-Control: public, max-age=31536000, immutable
