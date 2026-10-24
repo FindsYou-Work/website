@@ -171,7 +171,7 @@ the apex (a Cloudflare Redirect Rule on the zone).
 
 ```sh
 ./tools/build-dist.sh
-npx wrangler pages deploy dist --project-name=findsyou
+bunx wrangler pages deploy dist --project-name=findsyou
 ```
 
 Use an API token for the Cloudflare account that owns `findsyou.work`. The
